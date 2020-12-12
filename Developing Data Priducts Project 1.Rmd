@@ -1,0 +1,44 @@
+---
+title: "R Markdown and Leaflet Project"
+author: "samaa essa"
+date: "12/12/2020"
+output: html_document
+---
+
+## Task Description
+
+Host a webpage on either GitHub Pages, RPubs, or NeoCities.
+
+The webpage must contain the date that webpage is created, and it must contain a map created with Leaflet.
+
+### Load Data
+I choose dataset about the best restaurants in the world. By Megh Mayur. Contains the list of The World’s 50 Best Restaurants for 2018. it could be accessed from [here](https://www.kaggle.com/mmayur/the-worlds-50-best-restaurants).
+```{r}
+data <- read.csv("/home/samaaessa/Desktop/DS coursera/course 9/The Worlds 50 Best Restaurants 2018.csv")
+```
+
+### Library Needed
+```{r, echo=FALSE}
+library(leaflet)
+library(htmltools)
+```
+
+### Map creation
+```{r}
+map <- data %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(popup=paste
+             ("<br>Country: ", 
+               htmlEscape(data$Country), 
+              "<br>City: ", 
+               htmlEscape(data$City), 
+              "<br>Restaurant: ", 
+               htmlEscape(data$Name),
+              "<br>Ranking: ",
+               formatC(data$Ranking, format = "d", big.mark = ",")
+              ) 
+            )
+map
+```
+
