@@ -1,0 +1,44 @@
+---
+title: "R Markdown & Plotly"
+author: "samaa essa"
+date: "12/14/2020"
+output: html_document
+---
+
+## Task descrption
+
+Create a web page presentation using R Markdown that features a plot created with Plotly. Host your webpage on either GitHub Pages, RPubs, or NeoCities. Your webpage must contain the date that you created the document, and it must contain a plot created with Plotly.
+
+## Data
+A manager at the bank is disturbed with more and more customers leaving their credit card services. They would really appreciate if one could predict for them who is gonna get churned so they can proactively go to the customer to provide them better services and turn customers' decisions in the opposite direction
+
+I got this dataset from a website with the URL as [https://leaps.analyttica.com/home](https://leaps.analyttica.com/home). I have been using this for a while to get datasets and accordingly work on them to produce fruitful results. The site explains how to solve a particular business problem.
+
+Now, this dataset consists of 10,000 customers mentioning their age, salary, marital_status, credit card limit, credit card category, etc. There are nearly 18 features.
+
+## Load Data and some needed libraries
+```{r}
+#load data
+data <- read.csv("/home/samaaessa/Desktop/DS coursera/course 9/BankChurners.csv")
+
+#import Libraries
+library(plotly)
+```
+
+## Plots
+plot 1: Age distribution
+```{r}
+plot_ly(data,x=data$Customer_Age,type = "histogram")
+```
+***
+plot 2: boxplot that show the 5 values for age of Female vs. Male
+```{r}
+plot_ly(data,x=data$Customer_Age,color = data$Gender,type = "box")
+```
+***
+plot 3: Credit limits Vs. Income category specified by card category
+```{r}
+plot_ly(data,x = data$Credit_Limit,y =data$Income_Category,color = data$Card_Category, type = "scatter")
+```
+
+
